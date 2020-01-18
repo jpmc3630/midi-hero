@@ -53,3 +53,21 @@ kbd {
   letter-spacing: .1rem;
   color: #ffc600;
 }
+
+
+/* STYLES FROM JAMES */
+
+#stage {
+  position: absolute;
+  background-color: orange;
+}
+.drum {
+  height: 20px;
+  width: 50px;
+}
+.notation {
+  background-color: orange;
+  width: 30px;
+  padding: 0 10px 0 10px;
+  float: left;
+}
