@@ -34,7 +34,12 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
+
+
+
+// two lines below commented out to see if will run on heroku
+
+// db.sequelize.sync(syncOptions).then(function() {
   app.listen(PORT, function() {
     console.log(
       "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
@@ -42,6 +47,6 @@ db.sequelize.sync(syncOptions).then(function() {
       PORT
     );
   });
-});
+// });
 
 module.exports = app;
