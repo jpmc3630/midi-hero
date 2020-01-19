@@ -20,9 +20,19 @@ body,html {
   min-height: 100vh;
   align-items: center;
   justify-content: center;
+  
+}
+
+
+.keys2 {
+  height: 140px;
 }
 
 .key {
+  float:left; 
+/* james added this float and changed the keys container div class to keys2 in the html */
+
+
   border: .4rem solid black;
   border-radius: .5rem;
   margin: 1rem;
@@ -55,19 +65,46 @@ kbd {
 }
 
 
-/* STYLES FROM JAMES */
+/* the div that crops the big scrolling div */
+#screen {
+  position: absolute; 
+  height:600px;
+  width:500px; 
+  overflow:hidden;
+  
+}
 
+/* the big scrolling div */
 #stage {
   position: absolute;
-  background-color: orange;
+  background-color: white;
+  
 }
-.drum {
-  height: 20px;
-  width: 50px;
+
+/* the black line at the top - not in use */
+.baseline {
+  background-color: black; 
+  height: 4px; 
+  width: 100%;
 }
+
+/* the class for the individual track channels */
 .notation {
-  background-color: orange;
-  width: 30px;
-  padding: 0 10px 0 10px;
+  background-color: lightgray;
+  width: 100px;
+  margin: 0 10px 0 10px;
   float: left;
+  border: .4rem solid black;
+  border-radius: .5rem;
+}
+
+/* note on */
+.noteOn {
+  background-color:rgb(97, 97, 97); 
+  width: 100%;
+}
+
+/* gap between notes */
+.noteOff {
+  width: 100%;
 }

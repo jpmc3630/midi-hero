@@ -1,156 +1,66 @@
-    <script src="./js/webaudio-tinysynth.js"></script>
-    <script src="./js/levels/lawandorder.js"></script>
-    <script src="./js/game.js"></script>
+<script src="./js/webaudio-tinysynth.js"></script>
+<script src="./js/levels/lawandorder.js"></script>
+<script src="./js/game.js"></script>
 
-  
-  <div class="keys">
+
+<div class="container text-center">
+  <div class="keys2">
     <div data-key="65" class="key">
       <kbd>A</kbd>
-      <span class="sound">clap</span>
+      <span class="sound">KICK</span>
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
-      <span class="sound">hihat</span>
+      <span class="sound">RIMSHOT</span>
     </div>
     <div data-key="68" class="key">
       <kbd>D</kbd>
-      <span class="sound">kick</span>
+      <span class="sound">TRIANGLE</span>
     </div>
     <div data-key="70" class="key">
       <kbd>F</kbd>
-      <span class="sound">openhat</span>
+      <span class="sound">BOOP</span>
     </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">boom</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">ride</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">snare</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">tom</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">tink</span>
-    </div>
-    
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
-  <audio data-key="83" src="sounds/hihat.wav"></audio>
-  <audio data-key="68" src="sounds/kick.wav"></audio>
-  <audio data-key="70" src="sounds/openhat.wav"></audio>
-  <audio data-key="71" src="sounds/boom.wav"></audio>
-  <audio data-key="72" src="sounds/ride.wav"></audio>
-  <audio data-key="74" src="sounds/snare.wav"></audio>
-  <audio data-key="75" src="sounds/tom.wav"></audio>
-  <audio data-key="76" src="sounds/tink.wav"></audio>
+
+  <div id="screen">
+      <div id="stage">
+          <div class="notation" id= "track1-div"></div>
+          <div class="notation" id= "track2-div"></div>
+          <div class="notation" id= "track3-div"></div>
+          <div class="notation"  id= "track4-div"></div>
+      </div>
+  </div>
+  
 
 
 
-    <!-- <h1>webaudio-tinysynth : js version test</h1> -->
-    <!-- This is a simple sample of webaudio-tinysynth (JavaScript library version) page. -->
     <div style="float:right;">
-        <button onclick="Test()">Test audioContext</button><br>
-        <button onclick="loadMidiUrl()">Load Law n Order</button><br>
-        <input type="file" onchange="loadMidi(this.files)"/><br>
-        <button onclick="playMidi()">Play</button>
-        <button onclick="stopMidi()">Stop</button>
-        <div id="status"></div>
-        <div id="status2">ere</div>
-        <br/>
-    
-    
-        Loop : <input type="checkbox" onchange="synth.setLoop(this.checked)"/><br/>
-        MasterVol<br/>
-        <input type="range" value="50" min="0" max="100" oninput="synth.setMasterVol(this.value/100)"/><br/>
-        ReverbLev<br/>
-        <input type="range" value="50" min="0" max="100" oninput="synth.setReverbLev(this.value/100)"/><br/>
-        
-        <br/>
-        Quality : <select onchange="synth.setQuality(this.selectedIndex)"><option>Quality=0</option><option selected>Quality=1</option></select>
-        <br/>
-        Timbre : <select id="prog" onchange="SetProgram(this.selectedIndex)"></select>
-        
-   
-        <br/>
-        <button onmousedown="synth.send([0x90,60,100])" onmouseup="synth.send([0x80,60,0])">C</button>
-        <button onmousedown="synth.send([0x90,62,100])" onmouseup="synth.send([0x80,62,0])">D</button>
-        <button onmousedown="synth.send([0x90,64,100])" onmouseup="synth.send([0x80,64,0])">E</button>
-        <button onmousedown="synth.send([0x90,65,100])" onmouseup="synth.send([0x80,65,0])">F</button>
-        <button onmousedown="synth.send([0x90,67,100])" onmouseup="synth.send([0x80,67,0])">G</button>
-        <button onmousedown="synth.send([0x90,69,100])" onmouseup="synth.send([0x80,69,0])">A</button>
-        <button onmousedown="synth.send([0x90,71,100])" onmouseup="synth.send([0x80,71,0])">B</button>
-        <button onmousedown="synth.send([0x90,72,100])" onmouseup="synth.send([0x80,72,0])">C</button>
-        
+
+{{!-- shonky scoreboard --}}
+      <h2 style="display:inline;">Score:</h2><h2 id="score" style="display:inline;">0</h2> 
+      <br>
+      Law and Order
+      <br>
+      
+      <button onclick="playMidi()">Play</button>
+      <button onclick="stopMidi()">Stop</button>
+      <div id="status"></div>
+      <br/>
+      
+  
+      {{!-- Loop : <input type="checkbox" onchange="synth.setLoop(this.checked)"/><br/> --}}
+      MasterVol<br/>
+      <input type="range" value="50" min="0" max="100" oninput="synth.setMasterVol(this.value/100)"/><br/>
+      ReverbLev<br/>
+      <input type="range" value="50" min="0" max="100" oninput="synth.setReverbLev(this.value/100)"/><br/>
+      <input type="file" onchange="loadMidi(this.files)"/><br>
+      <br/>
+      Quality: <select onchange="synth.setQuality(this.selectedIndex)"><option>Quality=0</option><option selected>Quality=1</option></select>
+      <br/>
+      Timbre : <select id="prog" onchange="SetProgram(this.selectedIndex)"></select>
+      
     </div>
       
-      <button class="drum" onmousedown="synth.send([0x99,0x25,0x40])" onmouseup="synth.send([0x89,0x25,0x00])">KICK</button>
-
-      <button class="drum" onmousedown="synth.send([0x99,0x28,0x40])" onmouseup="synth.send([0x89,0x28,0x00])">SNARE </button>
-      <button class="drum" onmousedown="synth.send([0x99,0x29,0x40])" onmouseup="synth.send([0x89,0x29,0x00])">BASS</button>
-      
-      <button class="drum" onmousedown="synth.send([0x99,0x33,0x40])" onmouseup="synth.send([0x89,0x32,0x00])">HAT</button>
-      <button class="drum" onmousedown="synth.send([0x99,0x34,0x40])" onmouseup="synth.send([0x89,0x34,0x00])">HAT</button>
-      <button class="drum" onmousedown="synth.send([0x99,0x35,0x40])" onmouseup="synth.send([0x89,0x35,0x00])">HAT</button>
-      <button class="drum" onmousedown="synth.send([0x99,0x36,0x40])" onmouseup="synth.send([0x89,0x36,0x00])">HAT</button>
-
-
-      <br><br>
-    
-<div style="background-color: black; height: 7px; width: 1000px;"></div>
-
-<div id="screen" style="position: absolute; height:600px; width:600px; overflow:hidden;">
-
-    <div id="stage">
-        <div class="notation" id= "kick"></div>
-        <div  class="notation" id= "snare"></div>
-        
-        <div class="notation" id= "bass"></div>
-        <div class="notation"  id= "hat"></div>
-    </div>
-
 </div>
-
-
-
-
-<script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-
-<script>
-  function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
-  }
-
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    console.log(audio);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
-
-    key.classList.add('playing');
-    audio.currentTime = 0;
-    audio.play();
-    
-    
-
-  const keys = Array.from(document.querySelectorAll('.key'));
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
-
-
-
-</script>
-
-
