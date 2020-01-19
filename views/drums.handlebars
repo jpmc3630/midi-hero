@@ -41,21 +41,21 @@
 {{!-- shonky scoreboard --}}
       <h2 style="display:inline;">Score:</h2><h2 id="score" style="display:inline;">0</h2> 
       <br>
+      Law and Order
+      <br>
       
-      <input type="file" onchange="loadMidi(this.files)"/><br>
       <button onclick="playMidi()">Play</button>
       <button onclick="stopMidi()">Stop</button>
       <div id="status"></div>
-      <div id="status2">ere</div>
       <br/>
-  
+      
   
       {{!-- Loop : <input type="checkbox" onchange="synth.setLoop(this.checked)"/><br/> --}}
       MasterVol<br/>
       <input type="range" value="50" min="0" max="100" oninput="synth.setMasterVol(this.value/100)"/><br/>
       ReverbLev<br/>
       <input type="range" value="50" min="0" max="100" oninput="synth.setReverbLev(this.value/100)"/><br/>
-      
+      <input type="file" onchange="loadMidi(this.files)"/><br>
       <br/>
       Quality: <select onchange="synth.setQuality(this.selectedIndex)"><option>Quality=0</option><option selected>Quality=1</option></select>
       <br/>

@@ -33,8 +33,6 @@ function playMidi(){
         e.style.top = offset + 'px';
 
         var st=synth.getPlayStatus();
-        status2.innerHTML = 'offset:' + offset + ' --- ' + 'current tick: ' + st.curTick;
-
         
         offset = -1 * st.curTick;
 
