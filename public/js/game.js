@@ -80,12 +80,21 @@ function Test(){
 
 window.onload = (event) => {
 
+
+  // Set global gameplay variables
     let relaxEarly = 20;
     let relaxLate = 60;
     let score = 0;
-    
-    let scoreBoard = document.getElementById('score');
 
+    // get DOM elements
+    let scoreBoard = document.getElementById('score');
+    let targetScore = document.getElementById('targetScore');
+    let tr1 = document.getElementById('track1-div');
+    let tr2 = document.getElementById('track2-div');
+    let tr3 = document.getElementById('track3-div');
+    let tr4 = document.getElementById('track4-div');
+
+  // current level track map
     let trackMap = {
       track1: {
         name: 'BASS DRUM',
@@ -106,116 +115,97 @@ window.onload = (event) => {
       }
     }
 
+    // declare NOTE ON object for keypress beat collision detection
     let onObj = {
       track1 : [],
       track2 : [],
       track3 : [],
       track4 : []
-    };
+    }
     
-    // draw the kick drum notation
-    let tr1 = document.getElementById('track1-div');
+    // Draw the NOTE ON and NOTE OFF notation in the DOM, and NOTE ON posiitions in NOTE ON object
+
+   // draw the kick drum notation
+    let currentPos = 0;    
     let str = ``;
-    let onTrack1 = [];
-    let currentPos = 0;
 
     for (let i=0; i < fish.track[1].event.length; i++) {
-        
         currentPos += fish.track[1].event[i].deltaTime;
-
         if (fish.track[1].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${fish.track[1].event[i].deltaTime}px"></div>`;
-            onTrack1.push(currentPos);
-            
+            onObj.track1.push(currentPos);
         } else {
             str += `<div class="noteOff" style="height:${fish.track[1].event[i].deltaTime}px"></div>`;
         }
     }
-
-    onObj.track1 = onTrack1;
     tr1.innerHTML = str;
 
-
     // draw the tr2 notation
-    let tr2 = document.getElementById('track2-div');
-    let onTrack2 = [];    
     currentPos = 0;
-    
     str = ``;
     for (let i=0; i < fish.track[3].event.length; i++) {
       currentPos += fish.track[3].event[i].deltaTime;
         if (fish.track[3].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${fish.track[3].event[i].deltaTime}px"></div>`;
-            onTrack2.push(currentPos);
+            onObj.track2.push(currentPos);
         } else {
             str += `<div class="noteOff" style="height:${fish.track[3].event[i].deltaTime}px"></div>`;
         }
     }
-    onObj.track2 = onTrack2;
     tr2.innerHTML = str;
 
-    
-    let tr3 = document.getElementById('track3-div');
-    let onTrack3 = [];    
+    // draw the tr3 notation
     currentPos = 0;
-// draw the tr3 notation
     str = ``;
     for (let i=0; i < fish.track[2].event.length; i++) {
       currentPos += fish.track[2].event[i].deltaTime;
         if (fish.track[2].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${fish.track[2].event[i].deltaTime}px"></div>`;
-            onTrack3.push(currentPos);
+            onObj.track3.push(currentPos);
         } else {
             str += `<div class="noteOff" style="height:${fish.track[2].event[i].deltaTime}px"></div>`;
         }
     }
-    onObj.track3 = onTrack3;
     tr3.innerHTML = str;
-
-
-    let tr4 = document.getElementById('track4-div');
-    let onTrack4 = [];    
+  
+    // draw the tr4 notation
     currentPos = 0;
-// draw the bass notation
-
-str = ``;
+    str = ``;
     for (let i=0; i < fish.track[4].event.length; i++) {
       currentPos += fish.track[4].event[i].deltaTime;
         if (fish.track[4].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${fish.track[4].event[i].deltaTime}px"></div>`;
-            onTrack4.push(currentPos);
+            onObj.track4.push(currentPos);
         } else {
             str += `<div class="noteOff" style="height:${fish.track[4].event[i].deltaTime}px"></div>`;
         }
     }
-    onObj.track4 = onTrack4;
     tr4.innerHTML = str;
 
-Init(); // call the midi player init
-loadMidiUrl(); // load song
+    let targetScoreInt = onObj.track1.length + onObj.track2.length + onObj.track3.length + onObj.track4.length;
+    targetScore.innerHTML = ' / ' + targetScoreInt;
 
-//This is the KEYPRESS
-// AND COLLISION BEAT DETECTION
-
-function removeTransition(e) {
-  if (e.propertyName !== 'transform') return;
-  e.target.classList.remove('playing');
-}
-
-function playSound(e) {
-  // const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-  
-  const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-  // if (!audio) return;
-
-  key.classList.add('playing');
-  // audio.currentTime = 0;
-  // audio.play();
+  Init(); // call the midi player init
+  loadMidiUrl(); // load song
 
 
+  //This is the KEYPRESS
+  // AND COLLISION BEAT DETECTION
 
+  function removeTransition(e) {
+    if (e.propertyName !== 'transform') return;
+    e.target.classList.remove('playing');
+  }
 
-  // collision detection for beat and keypreses
+  function playSound(e) {
+    // const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    // if (!audio) return;
+    key.classList.add('playing');
+    // audio.currentTime = 0;
+    // audio.play();
+
+    // collision detection for beat and keypreses
 
   switch (e.keyCode) {
 
@@ -224,7 +214,7 @@ function playSound(e) {
       synth.send(trackMap.track1.hex);
       for (let i=0; i < onObj.track1.length; i++) {
         if (strike1 > (onObj.track1[i]-relaxEarly) && strike1 < (onObj.track1[i]+relaxLate)) {
-
+            onObj.track1[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr1);
@@ -238,10 +228,10 @@ function playSound(e) {
       synth.send(trackMap.track2.hex);
       for (let i=0; i < onObj.track2.length; i++) {
         if (strike2 > (onObj.track2[i]-relaxEarly) && strike2 < (onObj.track2[i]+relaxLate)) {
+            onObj.track2[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr2);
-            
         }
     }
       break;
@@ -251,6 +241,7 @@ function playSound(e) {
       synth.send(trackMap.track3.hex);
       for (let i=0; i < onObj.track3.length; i++) {
         if (strike3 > (onObj.track3[i]-relaxEarly) && strike3 < (onObj.track3[i]+relaxLate)) {
+            onObj.track3[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr3);
@@ -263,10 +254,10 @@ function playSound(e) {
       synth.send(trackMap.track4.hex);
       for (let i=0; i < onObj.track4.length; i++) {
         if (strike4 > (onObj.track4[i]-relaxEarly) && strike4 < (onObj.track4[i]+relaxLate)) {
+            onObj.track4[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr4);
-
         }
     }
       break;
