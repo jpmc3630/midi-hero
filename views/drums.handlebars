@@ -1,25 +1,20 @@
-<script src="./js/webaudio-tinysynth.js"></script>
-<script src="./js/levels/lawandorder.js"></script>
-<script src="./js/game.js"></script>
-
-
 <div class="container text-center">
   <div class="keys2">
     <div data-key="65" class="key">
       <kbd>A</kbd>
-      <span class="sound">KICK</span>
+      <span id="button1-name" class="sound">KICK</span>
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
-      <span class="sound">RIMSHOT</span>
+      <span id="button2-name" class="sound">RIMSHOT</span id="button1-name">
     </div>
     <div data-key="68" class="key">
       <kbd>D</kbd>
-      <span class="sound">TRIANGLE</span>
+      <span id="button3-name" class="sound">TRIANGLE</span id="button1-name">
     </div>
     <div data-key="70" class="key">
       <kbd>F</kbd>
-      <span class="sound">BOOP</span>
+      <span id="button4-name" class="sound">BOOP</span id="button1-name">
     </div>
   </div>
 
@@ -39,7 +34,7 @@
     <div style="float:right;">
 
 {{!-- shonky scoreboard --}}
-      <h2 style="display:inline;">Score:</h2><h2 id="score" style="display:inline;">0</h2> 
+      <h2 style="display:inline;">Score:</h2><h2 id="score" style="display:inline;">0</h2><h2 id="targetScore" style="display:inline;"></h2> 
       <br>
       Law and Order
       <br>
@@ -64,3 +59,7 @@
     </div>
       
 </div>
+
+<script src="/js/webaudio-tinysynth.js"></script>
+<script src="/js/levels/{{levelName}}.js"></script>
+<script src="/js/game.js"></script>

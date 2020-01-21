@@ -1,4 +1,30 @@
-fish = {
+// current level track map
+let midiFileName = 'lawandorder.mid';
+
+let trackMap = {
+  track1: {
+    name: 'KICK',
+    hex: [0x99,0x24,100],
+    midiTr: 1
+  },
+  track2: {
+    name: 'SNARE',
+    hex: [0x99,0x25,100],
+    midiTr: 3
+  },
+  track3: {
+    name: 'TRIANGLE',
+    hex: [0x99,0x50,75],
+    midiTr: 2
+  },
+  track4: {
+    name: 'TIMPANI',
+    hex: [0x91,50,50],
+    midiTr: 4
+  }
+}
+
+let trackNotation = {
   "formatType": 1,
   "tracks": 5,
   "track": [
