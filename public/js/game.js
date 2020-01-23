@@ -73,12 +73,15 @@ window.onload = (event) => {
 
   // Set global gameplay variables
     let relaxEarly = 20;
-    let relaxLate = 60;
+    let relaxLate = 70;
     let score = 0;
-
+    let misses = 0;
+    let started = false;
     // get DOM elements
     let scoreBoard = document.getElementById('score');
     let targetScore = document.getElementById('targetScore');
+    let missesBoard = document.getElementById('misses');
+    let prompt = document.getElementById('prompt');
     let tr1 = document.getElementById('track1-div');
     let tr2 = document.getElementById('track2-div');
     let tr3 = document.getElementById('track3-div');
@@ -93,7 +96,7 @@ window.onload = (event) => {
     b3.innerHTML = trackMap.track3.name;
     b4.innerHTML = trackMap.track4.name;
 
-    let hexNow = trackMap.track4.hex;
+    
 
     // declare NOTE ON object for keypress beat collision detection
     let onObj = {
@@ -101,7 +104,7 @@ window.onload = (event) => {
       track2 : [],
       track3 : [],
       track4 : [],
-      melodyEventArr : []
+      track4Event : []
     }
     
     // Draw the NOTE ON and NOTE OFF notation in the DOM, and NOTE ON posiitions in NOTE ON object
@@ -112,9 +115,10 @@ window.onload = (event) => {
 
     for (let i=0; i < trackNotation.track[trackMap.track1.midiTr].event.length; i++) {
         currentPos += trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track1.midiTr].event[i].type == 8) {
+        if (trackNotation.track[trackMap.track1.midiTr].event[i].type == 9) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime}px"></div>`;
-            onObj.track1.push(currentPos);
+            let strikePos = currentPos - trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime;
+            onObj.track1.push(strikePos);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime}px"></div>`;
         }
@@ -126,9 +130,10 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track2.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track2.midiTr].event[i].type == 8) {
+        if (trackNotation.track[trackMap.track2.midiTr].event[i].type == 9) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime}px"></div>`;
-            onObj.track2.push(currentPos);
+            let strikePos = currentPos - trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime;
+            onObj.track2.push(strikePos);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime}px"></div>`;
         }
@@ -140,9 +145,10 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track3.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track3.midiTr].event[i].type == 8) {
+        if (trackNotation.track[trackMap.track3.midiTr].event[i].type == 9) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime}px"></div>`;
-            onObj.track3.push(currentPos);
+            let strikePos = currentPos - trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime;
+            onObj.track3.push(strikePos);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime}px"></div>`;
         }
@@ -154,16 +160,20 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track4.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track4.midiTr].event[i].type == 8) {
+        if (trackNotation.track[trackMap.track4.midiTr].event[i].type == 9) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime}px"></div>`;
-            onObj.track4.push(currentPos);
-            onObj.melodyEventArr.push(trackNotation.track[trackMap.track4.midiTr].event[i].data[0]);
+            let strikePos = currentPos - trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime;
+            onObj.track4.push(strikePos);
+            let eventNow = [trackMap.track4.hex[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[1]];
+            // .unshift();
+            console.log(eventNow);
+            onObj.track4Event.push(eventNow);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime}px"></div>`;
         }
     }
     tr4.innerHTML = str;
-    console.log(onObj.melodyEventArr);
+    // console.log(onObj.track4Event);
     let targetScoreInt = onObj.track1.length + onObj.track2.length + onObj.track3.length + onObj.track4.length;
     targetScore.innerHTML = ' / ' + targetScoreInt;
 
@@ -176,14 +186,16 @@ window.onload = (event) => {
 
   function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
+ 
+      e.target.classList.remove('playing');
+  
   }
 
   function playSound(e) {
     // const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
     // if (!audio) return;
-    key.classList.add('playing');
+    
     // audio.currentTime = 0;
     // audio.play();
 
@@ -192,62 +204,85 @@ window.onload = (event) => {
   switch (e.keyCode) {
 
     case 65:
+      key.classList.add('playing');
       let strike1 = -1 * offset;
       synth.send(trackMap.track1.hex);
+      misses++;
       for (let i=0; i < onObj.track1.length; i++) {
         if (strike1 > (onObj.track1[i]-relaxEarly) && strike1 < (onObj.track1[i]+relaxLate)) {
+            misses--;
             onObj.track1[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr1);
         }
+        missesBoard.innerHTML = misses;
 
     }
       break;
 
     case 83:
+      key.classList.add('playing');
       let strike2 = -1 * offset;
       synth.send(trackMap.track2.hex);
+      misses++;
       for (let i=0; i < onObj.track2.length; i++) {
         if (strike2 > (onObj.track2[i]-relaxEarly) && strike2 < (onObj.track2[i]+relaxLate)) {
+            misses--;
             onObj.track2[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr2);
         }
+        missesBoard.innerHTML = misses;
     }
       break;
 
     case 68:
+      key.classList.add('playing');
       let strike3 = -1 * offset;
       synth.send(trackMap.track3.hex);
+      misses++;
       for (let i=0; i < onObj.track3.length; i++) {
         if (strike3 > (onObj.track3[i]-relaxEarly) && strike3 < (onObj.track3[i]+relaxLate)) {
+            misses--;
             onObj.track3[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr3);
         }
+        missesBoard.innerHTML = misses;
     }
       break;
 
     case 70:
+      key.classList.add('playing');
       let strike4 = -1 * offset;
-      synth.send(trackMap.track4.hex);
-      
+      // synth.send(trackMap.track4.hex);
+      misses++;
       for (let i=0; i < onObj.track4.length; i++) {
         if (strike4 > (onObj.track4[i]-relaxEarly) && strike4 < (onObj.track4[i]+relaxLate)) {
-            
-            // hexNow[2] = onObj.melodyEventArr[i];
-            // synth.send(hexNow);
+            misses--;
+
+            synth.send(onObj.track4Event[i]);
 
             onObj.track4[i]=0;
             score++;
             scoreBoard.innerHTML = score;
             flashYellow(tr4);
         }
+        missesBoard.innerHTML = misses;
     }
       break;
+
+    case 32:
+      if (!started) {
+        playMidi();
+        started = true;
+        console.log('space');
+        prompt.style.display = 'none';
+      }
+    break;
     
       default:
       
