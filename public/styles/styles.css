@@ -121,8 +121,8 @@ kbd {
   background-color: lightgreen;
   padding: 20px;
   z-index: 100;
-  width:200px;
-  height:100px;
+  /* width:200px; */
+  /* height:100px; */
   position:absolute;
   top:40%;
   left:50%;
