@@ -19,10 +19,12 @@ let trackMap = {
   },
   track4: {
     name: 'TIMPANI',
-    hex: [0x91,50,50],
+    hex: [0x91,50,80],
     midiTr: 4
   }
 }
+
+levelEndTick = 2000;
 
 let trackNotation = {
   "formatType": 1,

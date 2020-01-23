@@ -78,6 +78,7 @@ kbd {
 #stage {
   position: absolute;
   background-color: white;
+  /* padding-top: 20px */
   
 }
 
@@ -100,11 +101,27 @@ kbd {
 
 /* note on */
 .noteOn {
-  background-color:rgb(97, 97, 97); 
+  /* background-color:rgb(97, 97, 97); */
+  border-top: 10px solid black;
   width: 100%;
 }
 
 /* gap between notes */
 .noteOff {
+ 
   width: 100%;
+}
+
+
+#prompt {
+  background-color: lightgreen;
+  padding: 20px;
+  z-index: 100;
+  width:200px;
+  height:100px;
+  position:absolute;
+  top:40%;
+  left:50%;
+  margin:-50px 0 0 -100px; /* [-(height/2)px 0 0 -(width/2)px] */
+  
 }
