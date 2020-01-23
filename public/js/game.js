@@ -13,7 +13,7 @@ function loadMidi(files){
 }
 
 var offset = 0 //offset is the global variable for playhead/ current tick
-
+let paused = false;
 
 function playMidi(){
 
@@ -25,13 +25,18 @@ function playMidi(){
     let status2 = document.getElementById('status2');
     
     let roll = setInterval(function(){
-        
+      if (!paused) {
         e.style.top = offset + 'px';
 
         var st=synth.getPlayStatus();
         
         offset = -1 * st.curTick;
-    
+
+        if (st.curTick > levelEndTick) {
+          endGame();
+          
+        }
+      }
     }, 1);
 
 
@@ -51,10 +56,10 @@ function Init(){
     o.innerHTML=synth.getTimbreName(0,i);
     document.getElementById("prog").appendChild(o);
   }
-  setInterval(function(){
-    var st=synth.getPlayStatus();
-    document.getElementById("status").innerHTML="Play:"+st.play+"  Pos:"+st.curTick+"/"+st.maxTick;
-    },10);
+  // setInterval(function(){
+  //   var st=synth.getPlayStatus();
+  //   document.getElementById("status").innerHTML="Play:"+st.play+"  Pos:"+st.curTick+"/"+st.maxTick;
+  //   },10);
 
 }
 
@@ -67,21 +72,26 @@ function Test(){
 }
 // window.onload=Init;
 
+let targetScoreInt = 0;
+let score = 0;
+let misses = 0;
+
+let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
 
 
-  // Set global gameplay variables
+  // Set difficulty variables
     let relaxEarly = 20;
     let relaxLate = 70;
-    let score = 0;
-    let misses = 0;
+
     let started = false;
+    
     // get DOM elements
     let scoreBoard = document.getElementById('score');
     let targetScore = document.getElementById('targetScore');
     let missesBoard = document.getElementById('misses');
-    let prompt = document.getElementById('prompt');
+
     let tr1 = document.getElementById('track1-div');
     let tr2 = document.getElementById('track2-div');
     let tr3 = document.getElementById('track3-div');
@@ -95,8 +105,6 @@ window.onload = (event) => {
     b2.innerHTML = trackMap.track2.name;
     b3.innerHTML = trackMap.track3.name;
     b4.innerHTML = trackMap.track4.name;
-
-    
 
     // declare NOTE ON object for keypress beat collision detection
     let onObj = {
@@ -174,7 +182,7 @@ window.onload = (event) => {
     }
     tr4.innerHTML = str;
     // console.log(onObj.track4Event);
-    let targetScoreInt = onObj.track1.length + onObj.track2.length + onObj.track3.length + onObj.track4.length;
+    targetScoreInt = onObj.track1.length + onObj.track2.length + onObj.track3.length + onObj.track4.length;
     targetScore.innerHTML = ' / ' + targetScoreInt;
 
   Init(); // call the midi player init
@@ -276,32 +284,50 @@ window.onload = (event) => {
       break;
 
     case 32:
-      if (!started) {
+      if (synth.getPlayStatus().play == 0) {
         playMidi();
-        started = true;
-        console.log('space');
+        // started = true;
         prompt.style.display = 'none';
+      } else {
+        // paused = true;
+        stopMidi();
+        prompt.innerHTML = '<h1>PAUSED<BR> Press SPACE to continue</h1>';
+        prompt.style.display = 'block';
+      // } else if (paused) {
+      //   paused = false;
+      //   stopMidi();
       }
     break;
     
       default:
       
+    }
+
   }
-  
+
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+  window.addEventListener('keydown', playSound);
+
+
+  // flashes notation channel when keypress collides
+  function flashYellow(elem) {
+    elem.style.backgroundColor = '#ffc600';
+    setTimeout(function(){
+      elem.style.backgroundColor = 'lightgray';
+    }, 100)
+  }
+
+
+
 }
 
+function endGame() {
+  stopMidi();
 
-const keys = Array.from(document.querySelectorAll('.key'));
-keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-window.addEventListener('keydown', playSound);
-
-
-// flashes notation channel when keypress collides
-function flashYellow(elem) {
-  elem.style.backgroundColor = '#ffc600';
-  setTimeout(function(){
-    elem.style.backgroundColor = 'lightgray';
-  }, 100)
+  let finalScore = score-misses;
+  prompt.innerHTML = `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><a href="/levels">Back to levels</a>`;
+  prompt.style.display = 'block';
+  paused = true;
 }
-
-};

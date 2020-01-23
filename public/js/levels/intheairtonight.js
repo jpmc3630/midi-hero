@@ -24,6 +24,8 @@ let trackMap = {
   }
 }
 
+levelEndTick = 200000;
+
 let trackNotation = {
   "formatType": 1,
   "tracks": 5,
