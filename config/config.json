@@ -1,16 +1,16 @@
 {
   "development": {
-    "username": "sql12320232",
-    "password": "JwYbefuzGa",
-    "database": "sql12320232",
-    "host": "sql12.freemysqlhosting.net",
+    "username": "qrZclhCfcO",
+    "password": "YOgbkN3AhC",
+    "database": "qrZclhCfcO",
+    "host": "remotemysql.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "password",
-    "database": "testdb",
-    "host": "localhost",
+    "username": "qrZclhCfcO",
+    "password": "YOgbkN3AhC",
+    "database": "qrZclhCfcO",
+    "host": "remotemysql.com",
     "dialect": "mysql",
     "logging": false
   },
