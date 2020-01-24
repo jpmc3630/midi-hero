@@ -1,6 +1,6 @@
 // current level track map
 let midiFileName = 'intheairtonight.mid';
-
+let levelURL = '/level/intheairtonight';
 let levelID = 2;
 let levelName = 'In The Air Tonight';
 let levelEndTick = 1000;

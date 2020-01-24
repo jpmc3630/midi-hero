@@ -83,7 +83,7 @@ let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
 
-  getHighscores();
+  getHighscores(true);
 
   // Set difficulty variables
     let relaxEarly = 20;
@@ -336,12 +336,12 @@ function endGame() {
   let resultStr = ``;
 
   resultStr += `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><br>`;
-//<a href="/levels">Back to levels</a>
-  // if (finalScore > existingHighscores[4].score) {
-    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name-text" placeholder="anonymous"><br><button id="post-score-button" onClick="postHighscore()">Submit</button>`;
-  // } else {
 
-  // }
+  if (finalScore > existingHighscores[4].score) {
+    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name-text" placeholder="anonymous"><br><button id="post-score-button" onClick="postHighscore()">Submit</button>`;
+  } else {
+    resultStr += `You didn't make it onto the scoreboard this time.<br>Better luck next time!<br><a href="${levelURL}"><button>Play Again</button></a><a href="/levels"><button>Pick New Level</button></a>`;
+  }
 
   prompt.innerHTML = resultStr;
   prompt.style.display = 'block';
@@ -350,12 +350,9 @@ function endGame() {
 }
 
 function postHighscore() {
+
   let nick = document.getElementById('name-text').value;
-  // let newEntry = {
-  //   levelid: 2,
-  //   nickname: 'Jamessd',
-  //   score: 12
-  // }
+  prompt.innerHTML = `Loading...`;
 
 
   let newEntry = {
@@ -363,22 +360,31 @@ function postHighscore() {
     nickname: nick,
     score: finalScore
   }
-  console.log(newEntry);
 
-  $.post("/api/highscores", newEntry, function(data){
-    console.log('new post:');
-    console.log(data);
-    getHighscores();
+  let idToDelete = existingHighscores[4].id;
+  $.ajax({
+    method: "DELETE",
+    url: "/api/highscores/" + idToDelete
+  }).then(function() {
+
+    $.post("/api/highscores", newEntry, function(data){
+      getHighscores(false);
+    });
   });
+
 }
 
-function getHighscores() {
+
+function getHighscores(initial) {
+
   $.get("/api/highscores/" + levelID, function(data) {
-    existingHighscores = data;
+    if (initial) existingHighscores = data;
+    console.log(existingHighscores);
     let str = ``;
     for (let i=0; i < data.length; i++) {
       str += `${i+1}.  ${data[i].nickname}  ${data[i].score}<br>`
     }
     document.getElementById('highscores-div').innerHTML = str;
+    if (!initial) prompt.innerHTML = `${str}<br><br><a href="${levelURL}"><button>Play Again</button></a><a href="/levels"><button>Pick New Level</button></a>`;
   });
 }
