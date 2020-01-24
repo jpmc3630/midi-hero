@@ -13,15 +13,23 @@
 
 h1 {
     font-family: sans-serif;
-    color:white;
     font-size: 50px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: #666;
+         
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,.5)), to(rgba(0,0,0,1)));
 }
-
+h1:after {
+        content : 'Choose your Level:';
+        color: white;
+        text-shadow: 0 1px 0 white;
+}
 
 </style>
 
     <p>
-        <h1>Choose your Level:</h1>
+        <h1></h1>
         <a href="/level/lawandorder">
         <img src="images/lawAndOrder.png" width="300" height="200">
         </a>
