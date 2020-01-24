@@ -26,7 +26,7 @@ var db = {};
       host: "remotemysql.com",
       dialect: 'mysql',
       define: {
-          timestamps: false
+          timestamps: true
       }
   });
 // }
