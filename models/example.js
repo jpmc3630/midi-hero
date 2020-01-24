@@ -1,7 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
-  var Example = sequelize.define("Example", {
-    text: DataTypes.STRING,
-    description: DataTypes.TEXT
+  var Highscores = sequelize.define("Highscores", {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+  },
+    levelid: DataTypes.INTEGER,
+    nickname: DataTypes.STRING,
+    score: DataTypes.INTEGER
   });
-  return Example;
+  return Highscores;
 };

@@ -1,6 +1,10 @@
 // current level track map
 let midiFileName = 'intheairtonight.mid';
 
+let levelID = 2;
+let levelName = 'In The Air Tonight';
+let levelEndTick = 1000;
+
 let trackMap = {
   track1: {
     name: 'KICK',
@@ -24,7 +28,7 @@ let trackMap = {
   }
 }
 
-levelEndTick = 200000;
+
 
 let trackNotation = {
   "formatType": 1,

@@ -68,18 +68,22 @@ function Test(){
   o.connect(synth.getAudioContext().destination);
   o.start(0);
   o.stop(synth.getAudioContext().currentTime+1);
-  console.log(synth)
+  
 }
 // window.onload=Init;
 
 let targetScoreInt = 0;
 let score = 0;
 let misses = 0;
+let finalScore = 0;
+
+let existingHighscores = [];
 
 let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
 
+  getHighscores();
 
   // Set difficulty variables
     let relaxEarly = 20;
@@ -174,7 +178,7 @@ window.onload = (event) => {
             onObj.track4.push(strikePos);
             let eventNow = [trackMap.track4.hex[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[1]];
             // .unshift();
-            console.log(eventNow);
+            // console.log(eventNow);
             onObj.track4Event.push(eventNow);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime}px"></div>`;
@@ -323,11 +327,58 @@ window.onload = (event) => {
 
 }
 
+
 function endGame() {
   stopMidi();
 
-  let finalScore = score-misses;
-  prompt.innerHTML = `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><a href="/levels">Back to levels</a>`;
+  finalScore = score-misses;
+
+  let resultStr = ``;
+
+  resultStr += `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><br>`;
+//<a href="/levels">Back to levels</a>
+  // if (finalScore > existingHighscores[4].score) {
+    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name-text" placeholder="anonymous"><br><button id="post-score-button" onClick="postHighscore()">Submit</button>`;
+  // } else {
+
+  // }
+
+  prompt.innerHTML = resultStr;
   prompt.style.display = 'block';
   paused = true;
+
+}
+
+function postHighscore() {
+  let nick = document.getElementById('name-text').value;
+  // let newEntry = {
+  //   levelid: 2,
+  //   nickname: 'Jamessd',
+  //   score: 12
+  // }
+
+
+  let newEntry = {
+    levelid: levelID,
+    nickname: nick,
+    score: finalScore
+  }
+  console.log(newEntry);
+
+  $.post("/api/highscores", newEntry, function(data){
+    console.log('new post:');
+    console.log(data);
+    getHighscores();
+  });
+}
+
+function getHighscores() {
+  $.get("/api/highscores/" + levelID, function(data) {
+    existingHighscores = data;
+    let str = ``;
+    for (let i=0; i < data.length; i++) {
+      str += `${i+1}.  ${data[i].nickname}  ${data[i].score}<br>`
+    }
+    document.getElementById('highscores-div').innerHTML = str;
+  });
 }

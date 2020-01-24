@@ -1,24 +1,34 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // Get all highscores for level by levelID
+  app.get("/api/highscores/:levelid", function(req, res) {
+    let levelID = parseInt(req.params.levelid);
+
+    db.Highscores.findAll({ where: {
+      levelid: req.params.levelid
+      },
+      order: [
+        ['score', 'DESC']
+      ] }).then(function(result) {
+      res.json(result);
     });
+    
   });
 
   // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  app.post("/api/highscores", function(req, res) {
+    db.Highscores.create(req.body).then(function(result) {
+      res.json(result);
     });
   });
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
+    db.Highscores.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
   });
 };
+
+
