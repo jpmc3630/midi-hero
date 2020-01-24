@@ -76,6 +76,8 @@ let targetScoreInt = 0;
 let score = 0;
 let misses = 0;
 
+let existingHighscores = [];
+
 let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
@@ -327,10 +329,45 @@ function endGame() {
   stopMidi();
 
   let finalScore = score-misses;
-  prompt.innerHTML = `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><a href="/levels">Back to levels</a>`;
+
+  let resultStr = ``
+  resultStr += `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><br>`;
+//<a href="/levels">Back to levels</a>
+  if (finalScore > existingHighscores[4].score) {
+    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name"><br><button id="post-score-button" onClick="postHighscore()">`;
+  } else {
+
+  }
+
+  prompt.innerHTML = 
   prompt.style.display = 'block';
   paused = true;
 
-  
+  // function postHighscore() {
+  //   let newEntry = {
+  //     levelid: levelID,
+  //     nickname: ntus,
+  //     score: 200
+  //   }
+  // }
 
+  $.post("/api/highscores", newEntry, function(data){
+    console.log('new post:');
+    console.log(data);
+    getHighscores();
+  });
+
+
+}
+
+
+function getHighscores() {
+  $.get("/api/highscores/" + levelID, function(data) {
+    existingHighscores = data;
+    let str = ``;
+    for (let i=0; i < data.length; i++) {
+      str += `${i+1}.  ${data[i].nickname}  ${data[i].score}<br>`
+    }
+    document.getElementById('highscores-div').innerHTML = str;
+  });
 }

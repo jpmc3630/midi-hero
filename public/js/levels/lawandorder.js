@@ -1,6 +1,10 @@
 // current level track map
 let midiFileName = 'lawandorder.mid';
 
+let levelID = 1;
+let levelName = 'Law & Order Theme';
+let levelEndTick = 1000;
+
 let trackMap = {
   track1: {
     name: 'KICK',
@@ -24,7 +28,7 @@ let trackMap = {
   }
 }
 
-levelEndTick = 2000;
+
 
 let trackNotation = {
   "formatType": 1,

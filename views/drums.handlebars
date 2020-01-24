@@ -70,10 +70,22 @@
       Quality: <select onchange="synth.setQuality(this.selectedIndex)"><option>Quality=0</option><option selected>Quality=1</option></select>
       <br/>
       Timbre : <select id="prog" onchange="SetProgram(this.selectedIndex)"></select>
-      
+      <br>
+      <div id="highscores-div">
+
+      </div>
+
+
     </div>
       
+
+
 </div>
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 
 <script src="/js/webaudio-tinysynth.js"></script>
 <script src="/js/levels/{{levelName}}.js"></script>

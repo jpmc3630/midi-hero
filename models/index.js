@@ -8,16 +8,29 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
+// if (config.use_env_variable) {
+//   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } else {
+//   var sequelize = new Sequelize(
+//     config.database,
+//     config.username,
+//     config.password,
+//     config
+//   );
+// }
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  var sequelize = new Sequelize(
-    config.database,
-    config.username,
-    config.password,
-    config
-  );
+  var sequelize = new Sequelize('qrZclhCfcO', 'qrZclhCfcO', 'YOgbkN3AhC', {
+      host: "remotemysql.com",
+      dialect: 'mysql',
+      define: {
+          timestamps: false
+      }
+  });
 }
+
 
 fs.readdirSync(__dirname)
   .filter(function(file) {
