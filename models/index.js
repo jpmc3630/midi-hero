@@ -19,9 +19,9 @@ var db = {};
 //   );
 // }
 
-if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
-} else {
+// if (config.use_env_variable) {
+//   var sequelize = new Sequelize(process.env[config.use_env_variable]);
+// } else {
   var sequelize = new Sequelize('qrZclhCfcO', 'qrZclhCfcO', 'YOgbkN3AhC', {
       host: "remotemysql.com",
       dialect: 'mysql',
@@ -29,7 +29,7 @@ if (config.use_env_variable) {
           timestamps: false
       }
   });
-}
+// }
 
 
 fs.readdirSync(__dirname)
