@@ -15,6 +15,10 @@
     "logging": false
   },
   "production": {
+    "username": "qrZclhCfcO",
+    "password": "YOgbkN3AhC",
+    "database": "qrZclhCfcO",
+    "host": "remotemysql.com",
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
