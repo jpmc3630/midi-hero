@@ -68,7 +68,7 @@ function Test(){
   o.connect(synth.getAudioContext().destination);
   o.start(0);
   o.stop(synth.getAudioContext().currentTime+1);
-  console.log(synth)
+  
 }
 // window.onload=Init;
 
@@ -82,6 +82,7 @@ let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
 
+  getHighscores();
 
   // Set difficulty variables
     let relaxEarly = 20;
@@ -176,7 +177,7 @@ window.onload = (event) => {
             onObj.track4.push(strikePos);
             let eventNow = [trackMap.track4.hex[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[1]];
             // .unshift();
-            console.log(eventNow);
+            // console.log(eventNow);
             onObj.track4Event.push(eventNow);
         } else {
             str += `<div class="noteOff" style="height:${trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime}px"></div>`;
@@ -333,11 +334,11 @@ function endGame() {
   let resultStr = ``
   resultStr += `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><br>`;
 //<a href="/levels">Back to levels</a>
-  if (finalScore > existingHighscores[4].score) {
+  // if (finalScore > existingHighscores[4].score) {
     resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name"><br><button id="post-score-button" onClick="postHighscore()">`;
-  } else {
+  // } else {
 
-  }
+  // }
 
   prompt.innerHTML = 
   prompt.style.display = 'block';
