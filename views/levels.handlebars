@@ -1,5 +1,42 @@
 
+<style scoped>
+ .container {
+    text-align: center;
+    margin-top: 400px;
+ }
+ 
+ body {
+    background-image: url("/images/background_level.jpg"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
-<a href="/level/lawandorder">Law and Order</a>
+h1 {
+    font-family: sans-serif;
+    font-size: 50px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    color: #666;
+         
+    -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), color-stop(50%, rgba(0,0,0,.5)), to(rgba(0,0,0,1)));
+}
+h1:after {
+        content : 'Choose your Level:';
+        color: white;
+        text-shadow: 0 1px 0 white;
+}
 
-<a href="/level/intheairtonight">In the Air Tonight</a>
+</style>
+
+    <p>
+        <h1></h1>
+        <a href="/level/lawandorder">
+        <img src="images/lawAndOrder.png" width="300" height="200">
+        </a>
+        <a href="/level/intheairtonight">
+        <img src="images/inTheAirTonight.png" width="300" height="200">
+        </a>
+        <a href="/levels">
+        <img src="images/coming_soon.jpg" width="300" height="200">
+        </a>
+    </p>
