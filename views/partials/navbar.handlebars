@@ -1,20 +1,43 @@
-<!-- views/partials/navbar.handlebars -->
 
+<style scoped>
+
+  .navbar-brand {
+    font-size: 2.0em !important;
+    
+  }
+
+  .navbar li {
+    font-size: 1.8em !important;
+    padding-right: 10px;
+  }
+
+  
+</style>
+
+<!-- views/partials/navbar.handlebars -->
 <nav class="navbar navbar-expand-lg navbar-darkght bg-dark">
-  <a class="navbar-brand" href="/">Midi Hero</a>
+  <a class="navbar-brand" href="/"></a>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/login">Login</a>
+        <a class="nav-link" href="/">Home</a>
       </li>
-      <li class="nav-item active"></li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/levels">Levels</a>
+      </li>
+      {{!-- Controls not active yet, place holder for instructions --}}
+      <li class="nav-item active">
+        <a class="nav-link" href="/controls">Controls</a>
+      </li>
+      {{!-- refer to index.handlebars for new play button --}}
+      {{!-- <li class="nav-item active"></li>
         <a class="nav-link" href="/levels">Play the drums</a>
-      </li>  
+      </li>   --}}
     </ul>
   </div>
 </nav>
