@@ -330,4 +330,7 @@ function endGame() {
   prompt.innerHTML = `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><a href="/levels">Back to levels</a>`;
   prompt.style.display = 'block';
   paused = true;
+
+  
+
 }
