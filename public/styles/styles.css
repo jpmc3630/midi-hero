@@ -1,3 +1,14 @@
+.supercontainer {
+  background-color: red;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
 .list-group-item {
   line-height: 2.5;
 }
@@ -30,6 +41,9 @@ body,html {
 
 .keys2 {
   height: 140px;
+  position: relative;
+  top: 10px;
+  z-index:200;
 }
 
 .key {
@@ -81,9 +95,20 @@ kbd {
 /* the big scrolling div */
 #stage {
   position: absolute;
-  background-color: white;
+  background-color: lightblue;
   /* padding-top: 20px */
   
+}
+
+#panel {
+  border-radius: 15px 50px 30px 5px;
+  background-color: grey; 
+  float: right;
+  min-width: 220px;
+  padding: 20px;
+  /* position: relative; */
+  left: 800px;
+  box-shadow: 5px 10px;
 }
 
 /* the black line at the top - not in use */
@@ -105,8 +130,8 @@ kbd {
 
 /* note on */
 .noteOn {
-  /* background-color:rgb(97, 97, 97); */
-  border-top: 10px solid black;
+  background-color:rgb(97, 97, 97);
+  /* border-top: 10px solid grey; */
   width: 100%;
 }
 
@@ -119,13 +144,32 @@ kbd {
 
 #prompt {
   background-color: lightgreen;
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px;
+  
   padding: 20px;
   z-index: 100;
-  /* width:200px; */
-  /* height:100px; */
+  min-width:100px;
+  min-height:100px;
   position:absolute;
-  top:40%;
+  top:30%;
   left:50%;
   margin:-50px 0 0 -100px; /* [-(height/2)px 0 0 -(width/2)px] */
   
+}
+
+table {
+  
+  border: 1px solid black;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+
+#score {
+  font-size: 80px;
 }

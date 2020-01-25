@@ -19,10 +19,9 @@ function playMidi(){
 
 
   synth.playMIDI();
-
+  
 // stuff to get the stage rolling:
     let e = document.getElementById('stage');
-    let status2 = document.getElementById('status2');
     
     let roll = setInterval(function(){
       if (!paused) {
@@ -58,8 +57,8 @@ function Init(){
   }
   // setInterval(function(){
   //   var st=synth.getPlayStatus();
-  //   document.getElementById("status").innerHTML="Play:"+st.play+"  Pos:"+st.curTick+"/"+st.maxTick;
-  //   },10);
+  //   document.getElementById("status").innerHTML= st.curTick/st.maxTick*100;
+  //   },1000);
 
 }
 
@@ -76,6 +75,7 @@ let targetScoreInt = 0;
 let score = 0;
 let misses = 0;
 let finalScore = 0;
+let gameOver = false;
 
 let existingHighscores = [];
 
@@ -83,13 +83,14 @@ let prompt = document.getElementById('prompt');
 
 window.onload = (event) => {
 
+  document.getElementById("status").innerHTML=levelName;
   getHighscores(true);
 
   // Set difficulty variables
     let relaxEarly = 20;
     let relaxLate = 70;
 
-    let started = false;
+    
     
     // get DOM elements
     let scoreBoard = document.getElementById('score');
@@ -127,7 +128,7 @@ window.onload = (event) => {
 
     for (let i=0; i < trackNotation.track[trackMap.track1.midiTr].event.length; i++) {
         currentPos += trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track1.midiTr].event[i].type == 9) {
+        if (trackNotation.track[trackMap.track1.midiTr].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime}px"></div>`;
             let strikePos = currentPos - trackNotation.track[trackMap.track1.midiTr].event[i].deltaTime;
             onObj.track1.push(strikePos);
@@ -142,7 +143,7 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track2.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track2.midiTr].event[i].type == 9) {
+        if (trackNotation.track[trackMap.track2.midiTr].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime}px"></div>`;
             let strikePos = currentPos - trackNotation.track[trackMap.track2.midiTr].event[i].deltaTime;
             onObj.track2.push(strikePos);
@@ -157,7 +158,7 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track3.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track3.midiTr].event[i].type == 9) {
+        if (trackNotation.track[trackMap.track3.midiTr].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime}px"></div>`;
             let strikePos = currentPos - trackNotation.track[trackMap.track3.midiTr].event[i].deltaTime;
             onObj.track3.push(strikePos);
@@ -172,11 +173,11 @@ window.onload = (event) => {
     str = ``;
     for (let i=0; i < trackNotation.track[trackMap.track4.midiTr].event.length; i++) {
       currentPos += trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime;
-        if (trackNotation.track[trackMap.track4.midiTr].event[i].type == 9) {
+        if (trackNotation.track[trackMap.track4.midiTr].event[i].type == 8) {
             str += `<div class="noteOn" style="height:${trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime}px"></div>`;
             let strikePos = currentPos - trackNotation.track[trackMap.track4.midiTr].event[i].deltaTime;
             onObj.track4.push(strikePos);
-            let eventNow = [trackMap.track4.hex[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[0],trackNotation.track[trackMap.track4.midiTr].event[i].data[1]];
+            let eventNow = [trackMap.track4.hex[0],trackNotation.track[trackMap.track4.midiTr].event[i-1].data[0],trackNotation.track[trackMap.track4.midiTr].event[i-1].data[1]];
             // .unshift();
             // console.log(eventNow);
             onObj.track4Event.push(eventNow);
@@ -198,18 +199,12 @@ window.onload = (event) => {
 
   function removeTransition(e) {
     if (e.propertyName !== 'transform') return;
- 
       e.target.classList.remove('playing');
   
   }
 
   function playSound(e) {
-    // const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    // if (!audio) return;
-    
-    // audio.currentTime = 0;
-    // audio.play();
 
     // collision detection for beat and keypreses
 
@@ -288,32 +283,55 @@ window.onload = (event) => {
       break;
 
     case 32:
-      if (synth.getPlayStatus().play == 0) {
+      if (synth.getPlayStatus().play == 0 && gameOver == false) {
         playMidi();
-        // started = true;
         prompt.style.display = 'none';
-      } else {
-        // paused = true;
+      } else if (gameOver == false) {
         stopMidi();
         prompt.innerHTML = '<h1>PAUSED<BR> Press SPACE to continue</h1>';
         prompt.style.display = 'block';
-      // } else if (paused) {
-      //   paused = false;
-      //   stopMidi();
       }
     break;
     
       default:
-      
-    }
 
+    }
   }
 
+// function releaseSound(e) {
+
+//   switch (e.keyCode) {
+
+//     case 65:
+//       // synth.allSoundOff(trackMap.track1.hex[0]);
+//       e.target.classList.remove('playing');
+//       break;
+
+//     case 83:
+//       // synth.allSoundOff(trackMap.track2.hex[0]);
+//       e.target.classList.remove('playing');
+//       break;
+
+//     case 68:
+//       // synth.allSoundOff(trackMap.track3.hex[0]);
+//       e.target.classList.remove('playing');
+//       break;
+
+//     case 70:
+//       // synth.allSoundOff(trackMap.track4.hex[0]);
+//       e.target.classList.remove('playing');           
+//       break;
+
+//       default:
+      
+//     }
+
+// }
 
   const keys = Array.from(document.querySelectorAll('.key'));
   keys.forEach(key => key.addEventListener('transitionend', removeTransition));
   window.addEventListener('keydown', playSound);
-
+  // window.addEventListener('keyup', releaseSound);
 
   // flashes notation channel when keypress collides
   function flashYellow(elem) {
@@ -323,28 +341,29 @@ window.onload = (event) => {
     }, 100)
   }
 
-
-
 }
 
 
 function endGame() {
   stopMidi();
+  gameOver = true;
 
   finalScore = score-misses;
-
   let resultStr = ``;
-
+  let winner = false;
   resultStr += `<h2>Hits: ${score} <br> Misses: ${misses} <br> Final score: ${finalScore} <br> Out of a possible: ${targetScoreInt}</h2><br>`;
 
   if (finalScore > existingHighscores[4].score) {
-    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><input type="text" id="name-text" placeholder="anonymous"><br><button id="post-score-button" onClick="postHighscore()">Submit</button>`;
+    winner = true;
+    resultStr += `Congratulations<br> You've made it onto the scoreboard!<br>Please enter your name<br><form><input type="text" id="name-text" placeholder="Your name"><br><button id="post-score-button" onClick="postHighscore()">Submit</button></form>`;
   } else {
     resultStr += `You didn't make it onto the scoreboard this time.<br>Better luck next time!<br><a href="${levelURL}"><button>Play Again</button></a><a href="/levels"><button>Pick New Level</button></a>`;
   }
-
+  
   prompt.innerHTML = resultStr;
   prompt.style.display = 'block';
+  if (winner == true) document.getElementById('name-text').select();
+
   paused = true;
 
 }
@@ -380,11 +399,13 @@ function getHighscores(initial) {
   $.get("/api/highscores/" + levelID, function(data) {
     if (initial) existingHighscores = data;
     console.log(existingHighscores);
-    let str = ``;
+    let str = `<h5>Highscores</h5><table>`;
     for (let i=0; i < data.length; i++) {
-      str += `${i+1}.  ${data[i].nickname}  ${data[i].score}<br>`
+      str += `<tr><td>${i+1}.</td><td>${data[i].nickname}</td><td>${data[i].score}</td><tr>`
     }
+    str += `</table>`;
     document.getElementById('highscores-div').innerHTML = str;
-    if (!initial) prompt.innerHTML = `${str}<br><br><a href="${levelURL}"><button>Play Again</button></a><a href="/levels"><button>Pick New Level</button></a>`;
+    if (!initial) prompt.innerHTML = `${str}<br><br><a href="${levelURL}"><button id="play-again-button">Play Again</button></a><a href="/levels"><button>Pick New Level</button></a>`;
+    
   });
 }

@@ -3,7 +3,7 @@ let midiFileName = 'intheairtonight.mid';
 let levelURL = '/level/intheairtonight';
 let levelID = 2;
 let levelName = 'In The Air Tonight';
-let levelEndTick = 1000;
+let levelEndTick = 10000;
 
 let trackMap = {
   track1: {
@@ -17,13 +17,13 @@ let trackMap = {
     midiTr: 4
   },
   track3: {
-    name: 'CLOSED HAT',
+    name: 'HAT',
     hex: [0x99,0x2A,75],
     midiTr: 2
   },
   track4: {
     name: 'OPEN HAT',
-    hex: [0x91,0x2E,80],
+    hex: [0x99,0x2E,80],
     midiTr: 3
   }
 }

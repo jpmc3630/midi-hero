@@ -22,8 +22,8 @@ module.exports = function(app) {
 
   // Delete a highscore by id
   app.delete("/api/highscores/:id", function(req, res) {
-    db.Highscores.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+    db.Highscores.destroy({ where: { id: req.params.id } }).then(function(result) {
+      res.json(result);
     });
   });
 };
