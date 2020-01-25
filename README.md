@@ -2,7 +2,7 @@
 View it live at: <https://midi-ddr.herokuapp.com/>
 
 ### Game Page
-![middHero](https://github.com/jpmc3630/project2/tree/master/public/images/Screenshot3.png)
+![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/Screenshot3.png)
 
 ### Levels Page
 ![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot2.PNG)
