@@ -8,9 +8,6 @@ View it live at: <https://midi-ddr.herokuapp.com/>
 ### Levels Page
 ![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot2.PNG)
 
-### Game Page
-![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/game_page.PNG)
-
 ## Motivation:
 
 In order to try and challenge ourselves we decided on creating a game for the user to immerse themselves in and take them back to the world of DDR (Dance Dance Revoultion). The diference is, there's no dancing in this game just playing the drums!
