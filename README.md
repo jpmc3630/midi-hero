@@ -1,14 +1,14 @@
 # Midi Hero!
 View it live at: <https://midi-ddr.herokuapp.com/>
 
-### Home Page
-![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot1.PNG)
+### Game Page
+![middHero](https://github.com/jpmc3630/project2/tree/master/public/images/Screenshot3.png)
 
 ### Levels Page
-![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot2.PNG)
+![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot2.PNG)
 
-### Game Page
-![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/tree/master/public/images/Screenshot3.png)
+### Home Page
+![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot1.PNG)
 
 ## Motivation
 
@@ -22,7 +22,7 @@ We began researching midi files to use in this project as it allowed a practical
 
 MIDI files, webaudio-tinysynth, NodeJS, Express, HTML, CSS, JavaScript, Express-Handlebars, Sequelize, MySQL Database, JQuery, AJAX, Bootstrap, Googlefonts.
 
-The game is run from a nodeJS/express server. The game app was written in plain javascript and best pratices were attempted to improve performance and efficiency, as the game is heavy on DOM manipulation. We also used custom css styling and a minimal design for performance reasons also. A little jQuery was used for AJAX calls. A remote SQL server isused with the Sequalize ORM for highscore data. Some Bootsrap was used for the landing page.
+The game is run from a nodeJS/express server. The game app was written in plain javascript and best pratices were attempted to improve performance and efficiency, as the game is heavy on DOM manipulation. We also used custom css styling and a minimal design for performance reasons also. A little jQuery was used for AJAX calls. A remote SQL server isused with the Sequalize ORM for highscores data. Some Bootsrap was used for the landing page.
 
 ### New Technology Used
 
@@ -31,9 +31,9 @@ The game is run from a nodeJS/express server. The game app was written in plain 
 
 ## Additional Tools Used
 
-* midi-parser-js https://github.com/colxi/midi-parser-js
-We used this web based midi to JSON parser to genearate JSON objects we could easily interpret to draw the game levels (midi channel notation). This output was then hardcoded into our game levels.
-* Aria Maestosa MIDI file editor https://github.com/ariamaestosa/ariamaestosa
+* midi-parser-js https://github.com/colxi/midi-parser-js <br>
+We used this web based midi to JSON parser to generate JSON objects we could easily interpret to draw the game levels (midi channel notation). This output was then hardcoded into our game levels.
+* Aria Maestosa MIDI file editor https://github.com/ariamaestosa/ariamaestosa <br>
 Aria Maestosa is an open-source (GPL) midi sequencer/editor. While we used parsed midi data on one side, we used edited midi files to play the corresponding backing audio. We also used this editor to generate high tick frequency clock tracks that helped to keep our game tightly synced.
 
 ## Inspiration & Similar Projects
