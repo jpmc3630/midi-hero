@@ -18,6 +18,14 @@ In order to try and challenge ourselves we decided on creating a game for the us
 
 We began researching midi files to use in this project as it allowed a practical way to sync the game with a long piece of music - obviously crucial to a DDR/Guitar Hero style game. With javascript/browser environments not being super precise with timing, this allowed us a way to ensure the game was always in sync. The use of midi files also allowed us to generate our game levels from the midi files themselves, saving us an enourmous amount of time and tedious work. It also allowed us to synthesize the audio for the user's gameplay interaction, which allowed us to add melodic instruments that respond to the music notation in pitch, in addition to atonal percussion samples.
 
+## Future Development
+
+We have an unfinished Level Creator in development. This would allow custom midi files to be uploaded, and key gameplay aspects could be decided by the creator. For example, which midi instruments/tracks from the song are mapped to the game pads for playability, and which are to be audible in the backing music (to create karaoke style playability). Other customisable aspects includ track titles for drum pad labels, and level/song start and finish points. 
+
+This would vastly accelerate the speed of new level creation and could even create a community of contributors to the game. The development of new levels and the Level Creator itself will likely depend on feedback recieved about the game as a whole. 
+
+Looking further to the future, we would consider using a Canvas or WebGL environment, as the DOM performance is a bottleneck to adding additional features.
+
 ## Tech/Framework & Dependencies
 
 MIDI files, webaudio-tinysynth, NodeJS, Express, HTML, CSS, JavaScript, Express-Handlebars, Sequelize, MySQL Database, JQuery, AJAX, Bootstrap, Googlefonts.
