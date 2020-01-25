@@ -3,10 +3,10 @@
 View it live at: <https://midi-ddr.herokuapp.com/>
 
 ### Home Page
-![middHero-coverpage_PLACEHOLDER](https://raw.githubusercontent.com/jpmc3630/project2/master/images/screenshot1.png)
+![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot1.PNG)
 
 ### Levels Page
-![middHero-coverpage_PLACEHOLDER](https://raw.githubusercontent.com/jpmc3630/project2/master/images/screenshot2.png)
+![middHero-coverpage_PLACEHOLDER](https://github.com/jpmc3630/project2/blob/master/public/images/screenshot2.PNG)
 
 ### Game Page
 ![middHero-coverpage_PLACEHOLDER](https://raw.githubusercontent.com/jpmc3630/project2/master/images/screenshot2.png)
