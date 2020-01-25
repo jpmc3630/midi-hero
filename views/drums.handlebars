@@ -1,85 +1,81 @@
 
+<div class="container" style="width: 760px; background-color:lightblue; height:100%; position:relative; height: 750px; margin-bottom:20px; box-shadow: 25px 30px;">
+  {{!-- <div style="height: 1000px; width: 760px; left: left; background-color:lightcoral; z-index:-1; position: fixed;"></div> --}}
+  <div style="background-color: lightblue; height: 100%;" class="container text-center">
 
-<div class="container text-center">
-
-
-  <div class="keys2">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span id="button1-name" class="sound">KICK</span>
-    </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span id="button2-name" class="sound">RIMSHOT</span id="button1-name">
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span id="button3-name" class="sound">TRIANGLE</span id="button1-name">
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span id="button4-name" class="sound">BOOP</span id="button1-name">
+    <div class="keys2">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span id="button1-name" class="sound">&nbsp;</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span id="button2-name" class="sound">&nbsp;</span id="button1-name">
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span id="button3-name" class="sound">&nbsp;</span id="button1-name">
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span id="button4-name" class="sound">&nbsp;</span id="button1-name">
+      </div>
     </div>
 
+    <div id="screen">
+
+        <div id="prompt">
+          <br>
+          <H1> PRESS SPACE TO START</H1>
+        </div>
+
+        <div id="stage">
+            <div class="notation" id= "track1-div"></div>
+            <div class="notation" id= "track2-div"></div>
+            <div class="notation" id= "track3-div"></div>
+            <div class="notation"  id= "track4-div"></div>
+        </div>
+    </div>
     
+
+
+
+      <div id="panel">
+
+  {{!-- shonky scoreboard --}}
+        <h5 id="status"></h5><br>
+        Score<br>
+        {{!-- <h2 style="display:inline;">Score:</h2> --}}
+        <h1 id="score" style="display:inline;">0</h1><h4 id="targetScore" style="display:inline;"></h4> 
+        <br>
+         <h3 id="misses" style="display:inline;">0</h3>&nbsp;Mishits
+        <br>
+        
+        <br/>
+        
+    
+        {{!-- Loop : <input type="checkbox" onchange="synth.setLoop(this.checked)"/><br/> --}}
+        Volume<br/>
+        <input type="range" value="50" min="0" max="100" oninput="synth.setMasterVol(this.value/100)"/><br/>
+        Reverb<br/>
+        <input type="range" value="50" min="0" max="100" oninput="synth.setReverbLev(this.value/100)"/><br/>
+        {{!-- <input type="file" onchange="loadMidi(this.files)"/><br> --}}
+        <br/>
+        <select onchange="synth.setQuality(this.selectedIndex)"><option> LO-FI </option><option selected> HI-FI </option></select>
+        <br/>
+        <select id="prog" onchange="SetProgram(this.selectedIndex)"></select>
+        <br><br>
+        <div id="highscores-div">
+        </div>
+
+
+      </div>
+        
+
+
   </div>
-
-
-  <div id="screen">
-
-      <div id="prompt">
-        <H1> PLAY SPACE TO START</H1>
-      </div>
-
-      <div id="stage">
-          <div class="notation" id= "track1-div"></div>
-          <div class="notation" id= "track2-div"></div>
-          <div class="notation" id= "track3-div"></div>
-          <div class="notation"  id= "track4-div"></div>
-      </div>
-  </div>
-  
-
-
-
-    <div style="float:right;">
-
-{{!-- shonky scoreboard --}}
-      <h2 style="display:inline;">Score:</h2><h2 id="score" style="display:inline;">0</h2><h2 id="targetScore" style="display:inline;"></h2> 
-      <br>
-      <h4 style="display:inline;">Misses:</h4><h4 id="misses" style="display:inline;">0</h4>
-      <br>
-      Law and Order
-      <br>
-      
-      <button onclick="playMidi()">Play</button>
-      <button onclick="stopMidi()">Stop</button>
-      <div id="status"></div>
-      <br/>
-      
-  
-      {{!-- Loop : <input type="checkbox" onchange="synth.setLoop(this.checked)"/><br/> --}}
-      MasterVol<br/>
-      <input type="range" value="50" min="0" max="100" oninput="synth.setMasterVol(this.value/100)"/><br/>
-      ReverbLev<br/>
-      <input type="range" value="50" min="0" max="100" oninput="synth.setReverbLev(this.value/100)"/><br/>
-      <input type="file" onchange="loadMidi(this.files)"/><br>
-      <br/>
-      Quality: <select onchange="synth.setQuality(this.selectedIndex)"><option>Quality=0</option><option selected>Quality=1</option></select>
-      <br/>
-      Timbre : <select id="prog" onchange="SetProgram(this.selectedIndex)"></select>
-      <br>
-      <div id="highscores-div">
-
-      </div>
-
-
-    </div>
-      
-
-
+  <img src="/images/bottomedge.png" style="width: 460px; height: 5px; position: relative; top: -16px; left: 24px;">
 </div>
-
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

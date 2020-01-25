@@ -13,11 +13,14 @@ CREATE TABLE qrZclhCfcO.Highscores (
     PRIMARY KEY (id)
 );
 
-INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score)
-VALUES (1, 'James', 122);
-INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score)
-VALUES (1, 'John', 178);
-INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score)
-VALUES (2, 'Chris', 242);
-INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score)
-VALUES (2, 'Kevin', 202);
+
+
+
+INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score, createdAt)
+VALUES (3, 'John', 5, '1970-01-01 00:00:00');
+INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score, createdAt)
+VALUES (3, 'Chris', 5, '1970-01-01 00:00:00');
+INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score, createdAt)
+VALUES (3, 'Kevin', 3, '1970-01-01 00:00:00');
+INSERT INTO qrZclhCfcO.Highscores (levelid, nickname, score, createdAt)
+VALUES (3, 'Kevin', 2, '1970-01-01 00:00:00');
