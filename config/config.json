@@ -1,24 +1,24 @@
 {
   "development": {
-    "username": "qrZclhCfcO",
-    "password": "YOgbkN3AhC",
-    "database": "qrZclhCfcO",
-    "host": "remotemysql.com",
+    "username": "xxxxxxxxxx",
+    "password": "xxxxxxxxxx",
+    "database": "xxxxxxxxxx",
+    "host": "xxxxxxxxxx",
     "dialect": "mysql"
   },
   "test": {
-    "username": "qrZclhCfcO",
-    "password": "YOgbkN3AhC",
-    "database": "qrZclhCfcO",
-    "host": "remotemysql.com",
+    "username": "xxxxxxxxxx",
+    "password": "xxxxxxxxxx",
+    "database": "xxxxxxxxxx",
+    "host": "xxxxxxxxxx",
     "dialect": "mysql",
     "logging": false
   },
   "production": {
-    "username": "qrZclhCfcO",
-    "password": "YOgbkN3AhC",
-    "database": "qrZclhCfcO",
-    "host": "remotemysql.com",
+    "username": "xxxxxxxxxx",
+    "password": "xxxxxxxxxx",
+    "database": "xxxxxxxxxx",
+    "host": "xxxxxxxxxx",
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
