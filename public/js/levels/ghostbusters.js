@@ -3,7 +3,7 @@ let midiFileName = 'ghostbusters.mid';
 let levelURL = '/level/ghostbusters';
 let levelID = 3;
 let levelName = 'Ghostbusters Theme';
-let levelEndTick = 20000;
+let levelEndTick = 40000;
 
 let trackMap = {
   track1: {
