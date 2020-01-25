@@ -3,7 +3,7 @@ let midiFileName = 'lawandorder.mid';
 let levelURL = '/level/lawandorder';
 let levelID = 1;
 let levelName = 'Law & Order Theme';
-let levelEndTick = 5000;
+let levelEndTick = 29000;
 
 let trackMap = {
   track1: {

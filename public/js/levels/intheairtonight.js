@@ -3,7 +3,7 @@ let midiFileName = 'intheairtonight.mid';
 let levelURL = '/level/intheairtonight';
 let levelID = 2;
 let levelName = 'In The Air Tonight';
-let levelEndTick = 10000;
+let levelEndTick = 45000;
 
 let trackMap = {
   track1: {

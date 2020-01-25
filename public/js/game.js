@@ -57,7 +57,7 @@ function Init(){
   }
   // setInterval(function(){
   //   var st=synth.getPlayStatus();
-  //   document.getElementById("status").innerHTML= st.curTick/st.maxTick*100;
+  //   document.getElementById("status").innerHTML= st.curTick + '/' + st.maxTick;
   //   },1000);
 
 }
@@ -90,7 +90,6 @@ window.onload = (event) => {
     let relaxEarly = 20;
     let relaxLate = 70;
 
-    
     
     // get DOM elements
     let scoreBoard = document.getElementById('score');
@@ -283,6 +282,7 @@ window.onload = (event) => {
       break;
 
     case 32:
+      document.getElementById('line').style.display = 'block';
       if (synth.getPlayStatus().play == 0 && gameOver == false) {
         playMidi();
         prompt.style.display = 'none';
