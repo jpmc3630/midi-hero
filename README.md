@@ -30,7 +30,7 @@ Looking further to the future, we would consider using a Canvas or WebGL environ
 
 MIDI files, webaudio-tinysynth, NodeJS, Express, HTML, CSS, JavaScript, Express-Handlebars, Sequelize, MySQL Database, JQuery, AJAX, Bootstrap, Googlefonts.
 
-The game is run from a nodeJS/express server. The game app was written in plain javascript and best pratices were attempted to improve performance and efficiency, as the game is heavy on DOM manipulation. We also used custom css styling and a minimal design for performance reasons also. A little jQuery was used for AJAX calls. A remote SQL server is used with the Sequalize ORM for highscores data. Some Bootsrap was used for the landing page.
+The game is run from a nodeJS/express server. The game app was written in plain javascript and best practices were attempted to improve performance and efficiency, as the game is heavy on DOM manipulation. We also used custom css styling and a minimal design for performance reasons also. A little jQuery was used for AJAX calls. A remote SQL server is used with the Sequalize ORM for highscores data. Some Bootsrap was used for the landing page.
 
 ### New Technology Used
 
