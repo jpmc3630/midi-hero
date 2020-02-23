@@ -1,5 +1,5 @@
 # Midi Hero!
-View it live at: <https://midi-ddr.herokuapp.com/>
+View it live at: <https://midi-hero.herokuapp.com/>
 
 ### Game Page
 ![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/Screenshot3.png)
