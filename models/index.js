@@ -22,13 +22,13 @@ var db = {};
 // if (config.use_env_variable) {
 //   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 // } else {
-  var sequelize = new Sequelize('xxxxxxxxxx', 'xxxxxxxxxx', 'xxxxxxxxxx', {
-      host: "xxxxxxxxxx",
-      dialect: 'mysql',
-      define: {
-          timestamps: true
-      }
-  });
+  var sequelize = new Sequelize('sEwTAKkmYL', 'sEwTAKkmYL', 'oaXfZyYL8B', {
+    host: "remotemysql.com",
+    dialect: 'mysql',
+    define: {
+        timestamps: true
+    }
+});
 // }
 
 
