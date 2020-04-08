@@ -22,8 +22,8 @@ var db = {};
 // if (config.use_env_variable) {
 //   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 // } else {
-  var sequelize = new Sequelize('sEwTAKkmYL', 'sEwTAKkmYL', 'oaXfZyYL8B', {
-    host: "remotemysql.com",
+  var sequelize = new Sequelize('xxxxxxxx', 'xxxxxxxx', 'xxxxxxxx', {
+    host: "xxxxxxxx.com",
     dialect: 'mysql',
     define: {
         timestamps: true
