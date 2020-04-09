@@ -1,5 +1,5 @@
 # Midi Hero!
-Similar to Guitar Hero, this game creates levels by analysing MIDI files, and lets players attempt to break high scores by playing the drums along to visual cues and background music.
+Midi-Hero is a rhythm game that creates levels by analysing MIDI files. Players attempt to break high scores by playing the drums along to visual cues and background music.
 
 View it live at: <https://midi-hero.herokuapp.com/>
 
