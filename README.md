@@ -1,7 +1,7 @@
 # Midi Hero!
 Midi-Hero is a rhythm game that generates levels by analysing MIDI files. Players attempt to break high scores by playing the drums along to the music and visual cues.
 
-View it live at: <https://midi-hero.herokuapp.com/>
+View it live at: Midi-hero is down for maintenance unfortunately!
 
 ### Game Page
 ![middHero](https://github.com/jpmc3630/project2/blob/master/public/images/Screenshot3.png)
